@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "2957311780",
+    "firebase_url": "https://salesleads-bfc74.firebaseio.com",
+    "project_id": "salesleads-bfc74",
+    "storage_bucket": "salesleads-bfc74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2957311780:android:5d649d1d84f41292",
+        "android_client_info": {
+          "package_name": "com.example.user.salesleads"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2957311780-t0onrtd76hihrmsvjsh840ad8jtpjpp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQtDpAhOxm5IgWO_xkj2KhRGoA0ov3l6c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

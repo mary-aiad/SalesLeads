@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF3F3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/large_margin">
+
+        <Spinner
+            android:id="@+id/products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/products"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
+        </Spinner>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_lead_name"
+            android:hint="@string/edit_lead"
+            android:inputType="text"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:id="@+id/added_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:paddingBottom="@dimen/large_margin"
+            android:paddingTop="@dimen/large_margin"
+            android:textStyle="bold|italic"
+            android:textSize="@dimen/activity_vertical_margin"/>
+
+
+        <EditText
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/comment"
+            android:inputType="text"
+            android:gravity="start" />
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin"
+            android:text="@string/edit_btn"
+            android:onClick="edit"
+            android:textColor="#f16f7d"
+            android:background="@drawable/login_button"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="jobTitle">
+        <item>Job Title</item>
+        <item>Sales team1</item>
+        <item>Sales team2</item>
+        <item>Sales team3</item>
+    </string-array>
+
+    <string-array name="products" >
+        <item>Lead interest</item>
+        <item>Product 1</item>
+        <item>Product 2</item>
+        <item>Product 3</item>
+    </string-array>
+
+</resources>

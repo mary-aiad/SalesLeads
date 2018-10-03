@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/lead_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lead_name"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/product_choosen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lead_name"
+            android:text="@string/product"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+
+
+
+        <TextView
+            android:id="@+id/show_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3/1/2018"
+            android:textStyle="italic"
+            android:layout_below="@+id/product_choosen"/>
+
+        <TextView
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_alignBottom="@id/show_date"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="70dp"
+            android:text="@string/edit_btn"
+            android:textColor="#f16f7d"
+            android:textSize="18sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/delete_lead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_btn"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/show_date"
+            android:textSize="18sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="#f16f7d"
+            android:padding="10dp"/>
+
+    </RelativeLayout>
+</LinearLayout>
