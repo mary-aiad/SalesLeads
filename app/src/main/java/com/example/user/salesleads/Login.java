@@ -38,14 +38,13 @@ public class Login extends AppCompatActivity {
 
     FirebaseAuth.AuthStateListener mAuthListener;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         if (!isNetworkAvailable(this)) {
-            Toast.makeText(this, "No intenet connection", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
         } else {
             firebaseAuth = FirebaseAuth.getInstance();
             reference = FirebaseDatabase.getInstance().getReference();
@@ -61,9 +60,6 @@ public class Login extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                    else
-                        System.err.println("nullll ");
-
                 }
             };
 
@@ -137,7 +133,7 @@ public class Login extends AppCompatActivity {
 
                     if(userName.equals(user.getUserName()) && pass.equals(user.getPassword())){
                         progressDialog.dismiss();
-                        Toast.makeText(Login.this, "Login Succsseful ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Login.this, "Login Successful ", Toast.LENGTH_LONG).show();
 
                         SharedPreferences sharedPreferences = getApplicationContext().
                                 getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -151,7 +147,7 @@ public class Login extends AppCompatActivity {
                     }
                 }
                 progressDialog.dismiss();
-                Toast.makeText(Login.this, "Invalid user name or passowrd", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Invalid user name or password", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
