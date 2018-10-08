@@ -87,16 +87,12 @@ public class Sign_up extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             // email sent
-
-                            // after email is sent just logout the user and finish this activity
                             FirebaseAuth.getInstance().signOut();
                             startActivity(new Intent(Sign_up.this, Login.class));
                             finish();
                         }
                         else
                         {
-                            // email not sent, so display message and restart the activity or do whatever you wish to do
-
                             //restart this activity
                             overridePendingTransition(0, 0);
                             finish();
@@ -225,6 +221,7 @@ public class Sign_up extends AppCompatActivity {
                                                             if (task.isSuccessful()) {
                                                                 progressDialog.dismiss();
                                                                 Toast.makeText(Sign_up.this, "Successful sign-up", Toast.LENGTH_SHORT).show();
+                                                                sendVerficationEmail();
 
                                                                 SharedPreferences sharedPreferences = getApplicationContext().
                                                                         getSharedPreferences("MyPref", Context.MODE_PRIVATE);
