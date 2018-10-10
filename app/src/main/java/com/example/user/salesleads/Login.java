@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
-import android.preference.PreferenceManager;
+
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +29,7 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference reference;
+    private FirebaseDatabase firebaseDatabase;
     private FirebaseUser loginUser;
 
     private EditText userName;
@@ -37,6 +38,7 @@ public class Login extends AppCompatActivity {
     private Button signUp;
 
     FirebaseAuth.AuthStateListener mAuthListener;
+    public static SharedPreferences sharedPreferences = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,22 +48,32 @@ public class Login extends AppCompatActivity {
         if (!isNetworkAvailable(this)) {
             Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
         } else {
+            firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseAuth = FirebaseAuth.getInstance();
-            reference = FirebaseDatabase.getInstance().getReference();
+            reference = firebaseDatabase.getReference();
 
             mAuthListener = new FirebaseAuth.AuthStateListener() {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
                     if (user != null) {
                         loginUser = user;
-                        Toast.makeText(getApplicationContext(), "You are already Logged in ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You are already Logged in "+ user.getDisplayName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Login.this, Profile.class);
                         startActivity(intent);
                         finish();
                     }
                 }
             };
+
+            sharedPreferences = getApplicationContext().getSharedPreferences("MyPref", 0);
+
+            if (!sharedPreferences.getString("userName", " ").equals(" ")) {
+                Toast.makeText(getApplicationContext(), "You are already Logged in ", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Login.this, Profile.class);
+                startActivity(intent);
+                finish();
+        }
 
             userName = (EditText) findViewById(R.id.user_name);
             password = (EditText) findViewById(R.id.password);
@@ -130,17 +142,20 @@ public class Login extends AppCompatActivity {
                     User user = new User();
                     user.setUserName(dSnap.getValue(User.class).getUserName());
                     user.setPassword(dSnap.getValue(User.class).getPassword());
+                    user.setEmail(dSnap.getValue(User.class).getEmail());
 
                     if(userName.equals(user.getUserName()) && pass.equals(user.getPassword())){
                         progressDialog.dismiss();
-                        Toast.makeText(Login.this, "Login Successful ", Toast.LENGTH_LONG).show();
 
-                        SharedPreferences sharedPreferences = getApplicationContext().
+
+                        sharedPreferences = getApplicationContext().
                                 getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("userName", userName);
-                        editor.apply();
+                        editor.putString("email", user.getEmail());
+                        editor.commit();
 
+                        Toast.makeText(Login.this, "Login Successful ", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(Login.this, Profile.class);
                         startActivity(intent);
                         finish();
@@ -156,27 +171,18 @@ public class Login extends AppCompatActivity {
         });
     }
 
-        @Override
-        public void onStart() {
-            super.onStart();
-            if(firebaseAuth != null) {
-                firebaseAuth.addAuthStateListener(mAuthListener);
-                loginUser = firebaseAuth.getCurrentUser();
-            }
-        }
+    @Override
+    protected void onResume () {
+        super.onResume();
+        firebaseAuth.addAuthStateListener(mAuthListener);
+        loginUser = firebaseAuth.getCurrentUser();
+    }
 
-        @Override
-        protected void onResume () {
-            super.onResume();
-            firebaseAuth.addAuthStateListener(mAuthListener);
-            loginUser = firebaseAuth.getCurrentUser();
-        }
-
-        @Override
-        protected void onStop() {
-            super.onStop();
-            firebaseAuth.removeAuthStateListener(mAuthListener);
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        firebaseAuth.removeAuthStateListener(mAuthListener);
+    }
 
     public boolean isNetworkAvailable(Context context) {
         final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));

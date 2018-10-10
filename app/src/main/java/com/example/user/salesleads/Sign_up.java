@@ -86,19 +86,16 @@ public class Sign_up extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            // email sent
                             FirebaseAuth.getInstance().signOut();
                             startActivity(new Intent(Sign_up.this, Login.class));
                             finish();
                         }
                         else
                         {
-                            //restart this activity
                             overridePendingTransition(0, 0);
                             finish();
                             overridePendingTransition(0, 0);
                             startActivity(getIntent());
-
                         }
                     }
                 });
@@ -227,8 +224,9 @@ public class Sign_up extends AppCompatActivity {
                                                                         getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                                                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                                                 editor.putString("userName", userN);
+                                                                editor.putString("email", emailAddress);
                                                                 editor.putString("currentUserId", currentUser.getUid());
-                                                                editor.apply();
+                                                                editor.commit();
 
                                                                 Intent intent = new Intent(getApplicationContext(), Profile.class);
                                                                 startActivity(intent);

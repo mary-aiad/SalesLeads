@@ -63,7 +63,6 @@ public class AddLead extends AppCompatActivity {
             public  void  onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if(user != null){
-//                    String userid = loginUser.getUid();
                     currentUser = user;
               }
             }

@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -140,7 +139,6 @@ public class EditLead extends AppCompatActivity {
     private void update() {
 
         Query applesQuery = reference.child("leads").orderByChild("leadName").equalTo(oldData.getLeadName());
-        System.err.println("old dataaa  " + oldData.getLeadName());
         applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -148,13 +146,8 @@ public class EditLead extends AppCompatActivity {
                     if(appleSnapshot.getValue(Lead.class).getDate().equals(oldData.getDate())
                             && appleSnapshot.getValue(Lead.class).getProduct().equals(oldData.getProduct())
                             && appleSnapshot.getValue(Lead.class).getComment().equals(oldData.getComment())){
-                        System.err.println("founded " + oldData.getLeadName()+ dataSnapshot.getValue(Lead.class).getProduct());
                         appleSnapshot.getRef().removeValue();
-                        Toast.makeText(getApplicationContext(), "Done Deleted " + oldData.getLeadName(), Toast.LENGTH_LONG).show();
                     }
-                    else
-                        System.err.println("errorrrrr "+ oldData.getLeadName()+ dataSnapshot.getValue(Lead.class).getProduct());
-
                 }
             }
 

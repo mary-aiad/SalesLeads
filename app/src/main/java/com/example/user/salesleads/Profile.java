@@ -55,7 +55,8 @@ public class Profile extends AppCompatActivity
     private TextView profileUserName, profileEmail;
     private ProgressDialog progressDialog;
     private Button button;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences  = Login.sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +79,14 @@ public class Profile extends AppCompatActivity
                 email = currentUser.getEmail();
             }
 
-
             reference = FirebaseDatabase.getInstance().getReference();
 
-            sharedPreferences = getSharedPreferences("MyPref", 0);
-            if (sharedPreferences != null) {
+            sharedPreferences = getApplicationContext().getSharedPreferences("MyPref", 0);
+
+            if (!sharedPreferences.getString("userName", " ").equals(" ")) {
                 sharedName = sharedPreferences.getString("userName", " ");
-            }
+                email = sharedPreferences.getString("email", " ");
+                }
 
 
             navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -165,7 +167,6 @@ public class Profile extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.logout) {
@@ -177,11 +178,16 @@ public class Profile extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             firebaseAuth.getInstance().signOut();
-                            currentUser = null;
+                            sharedPreferences = getApplicationContext().
+                                    getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.clear();
+                            editor.commit();
+
+                            Toast.makeText(getApplicationContext(), "LogOut ", Toast.LENGTH_LONG).show();
 
                             startActivity(new Intent(Profile.this, Login.class));
                             finish();
-
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override

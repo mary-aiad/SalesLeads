@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lead_name"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/lead_name"
             android:text="@string/product"
-            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:textSize="17sp"
             android:textStyle="italic" />
 
 
@@ -34,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3/1/2018"
+            android:layout_marginLeft="4dp"
             android:textStyle="italic"
             android:layout_below="@+id/product_choosen"/>
 
@@ -41,30 +43,40 @@
             android:id="@+id/edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_alignBottom="@id/show_date"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="80dp"
             android:layout_marginRight="70dp"
             android:text="@string/edit_btn"
             android:textColor="#f16f7d"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:clickable="true"
             android:focusable="true"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:paddingLeft="5dp"
+            android:textColor="#f16f7d"
+            android:textSize="20sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="70dp"
+            />
         <TextView
             android:id="@+id/delete_lead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete_btn"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignBottom="@id/show_date"
-            android:textSize="18sp"
+            android:paddingRight="20dp"
+            android:paddingLeft="10dp"
+            android:textSize="17sp"
             android:clickable="true"
             android:focusable="true"
-            android:textColor="#f16f7d"
-            android:padding="10dp"/>
+            android:textColor="#f16f7d"/>
 
     </RelativeLayout>
 </LinearLayout>
